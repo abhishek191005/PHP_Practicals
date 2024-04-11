@@ -32,6 +32,7 @@ function isPrime($n){
 }
 ?>
 
+------------------------------------------------------------------------------------------------
 
 3) Write PHP program to print reverse of number.
 <?php
@@ -55,5 +56,412 @@ while ($number > 0) {
 echo "Reverse number: $reverse";
 ?>
 
+------------------------------------------------------------------------------------------------
 
 4) Write PHP program to based on multidimensional array
+<?php
+// Define a multidimensional array
+$students = array(
+    array("Abhishek", 20, "Male"),
+    array("DY", 22, "Female"),
+    array("Pluto", 19, "Female")
+);
+
+
+foreach ($students as $stud) {
+    echo "Name: " . $stud[0] . ", Age: " . $stud[1] . ", Gender: " . $stud[2] . "\n";
+}
+?>
+
+------------------------------------------------------------------------------------------------
+
+5) Write PHP program to sort associative and multidimensional array
+<?php
+// Define an associative array
+$ages = array("Abhishek" => 25, "DY" => 22, "Pluto" => 30);
+
+// Sort the associative array by values in ascending order
+asort($ages);
+
+// Print the sorted associative array
+echo "Sorted Associative Array (by value):\n";
+foreach ($ages as $name => $age) {
+    echo "$name: $age\n";
+}
+
+echo "\n";
+
+// Define a multidimensional array
+$students = array(
+    array("Abhishek", 20, "Computer Science"),
+    array("DY", 22, "Mathematics"),
+    array("Pluto", 21, "Physics")
+);
+
+// Sort the multidimensional array by the first column (name) in ascending order
+sort($students);
+
+// Print the sorted multidimensional array
+echo "Sorted Multidimensional Array (by name):\n";
+foreach ($students as $student) {
+    echo "Name: " . $student[0] . ", Age: " . $student[1] . ", Major: " . $student[2] . "\n";
+}
+?>
+------------------------------------------------------------------------------------------------
+
+6) Write PHP program based on interface.
+<?php
+// Define the interface
+interface Shape {
+    public function calculateArea();
+}
+
+// Define a class that implements the Shape interface
+class Circle implements Shape {
+    private $radius;
+
+    public function __construct($radius) {
+        $this->radius = $radius;
+    }
+
+    public function calculateArea() {
+        return pi() * $this->radius * $this->radius;
+    }
+}
+
+// Create an object of the Circle class
+$circle = new Circle(5);
+
+// Calculate and print the area of the circle
+echo "Area of the circle: " . $circle->calculateArea();
+?>
+------------------------------------------------------------------------------------------------
+
+7) Write PHP program based on introspection.
+<?php
+class abhi{
+public $fname,$lname;
+
+function __construct($fname,$lname){
+    $this ->fname=$fname;
+    $this->lname=$lname;
+    
+}
+
+function display(){
+    echo "My Name is $this->fname $this->lname\n";
+}
+}
+
+$a = new abhi("Abhishek", "Patil");
+$a->display();
+print_r("Class name of object is ".get_class($a)."\n");
+print_r(get_class_vars("abhi"));
+print_r(get_object_vars($a));
+print_r(get_class_methods($a));
+
+?>
+------------------------------------------------------------------------------------------------
+
+8) Write PHP program based on inheritance.
+<?php
+// Parent class
+class Animal {
+    protected $name;
+
+    public function __construct($name) {
+        $this->name = $name;
+    }
+
+    public function makeSound() {
+        echo "$this->name makes a sound.\n";
+    }
+}
+
+// Child class inheriting from Animal
+class Dog extends Animal {
+    public function bark() {
+        echo "$this->name barks loudly!\n";
+    }
+}
+
+// Create an object of the Dog class
+$dog = new Dog("Max");
+
+// Call methods from both parent and child classes
+$dog->makeSound(); // Method from parent class
+$dog->bark();      // Method from child class
+?>
+------------------------------------------------------------------------------------------------
+
+9) Write PHP program based on session variables ,start ,stop
+<?php
+// Start the session
+session_start();
+
+// Set session variables
+$_SESSION["username"] = "AbhishekDY";
+$_SESSION["email"] = "AbhishekDY@gmail.com";
+
+// Display session variables
+echo "Session variables are set.\n";
+echo "Username: " . $_SESSION["username"] . "\n";
+echo "Email: " . $_SESSION["email"] . "\n";
+
+// Stop the session
+session_unset(); // Unset all session variables
+session_destroy(); // Destroy the session
+
+echo "Session stopped and variables unset.";
+?>
+------------------------------------------------------------------------------------------------
+
+10)Write PHP program based on cookies.(isset,name,destroy)
+<?php
+// Check if the cookie named 'username' is set
+if (isset($_COOKIE['username'])) {
+    // If the cookie is set, display its value
+    echo "Welcome back, " . $_COOKIE['username'] . "!";
+} else {
+    // If the cookie is not set, display a message
+    echo "Welcome, guest!";
+}
+
+// Set a cookie named 'username' with a value 'John' that expires in 1 hour
+setcookie('username', 'John', time() + 3600);
+
+// Display a message indicating that the cookie has been set
+echo "<br>Cookie 'username' has been set.";
+
+// Destroy the cookie named 'username'
+setcookie('username', '', time() - 3600);
+
+// Display a message indicating that the cookie has been destroyed
+echo "<br>Cookie 'username' has been destroyed.";
+?>
+------------------------------------------------------------------------------------------------
+
+11)Write PHP program based on create database.
+
+<?php
+if(isset($_POST)) {
+ $servername = "localhost";
+ $username = "root";
+ $password = "";
+ //$dbname = "clg";
+ $conn = new mysqli($servername, $username, $password);
+ if ($conn->connect_error) {
+ die("Connection failed: " . $conn->connect_error);
+ }
+
+$sql = "CREATE DATABASE clg";
+if ($conn->query($sql) === TRUE) {
+ echo "Database created successfully";
+} else {
+ echo "Error creating database: " . $conn->error;
+}
+$conn->close();
+}
+?>
+------------------------------------------------------------------------------------------------
+
+12)Write PHP program based on select a table from database.
+<?php
+// Database connection parameters
+$servername = "localhost"; // Change this to your database server if it's not localhost
+$username = "root"; // Change this to your MySQL username
+$password = ""; // Change this to your MySQL password
+$database = "my_database"; // Change this to your database name
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $database);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// SQL query to select data from a table
+$sql = "SELECT * FROM abhi"; // Change 'your_table' to your table name
+
+// Execute query
+$result = $conn->query($sql);
+
+// Check if any rows were returned
+if ($result->num_rows > 0) {
+    // Output data of each row
+    while($row = $result->fetch_assoc()) {
+        echo "ID: " . $row["id"]. " - Name: " . $row["name"]. " - Email: " . $row["email"]. "<br>";
+    }
+} else {
+    echo "0 results";
+}
+
+// Close connection
+$conn->close();
+?>
+------------------------------------------------------------------------------------------------
+
+13)Write PHP program based to insert data in a table.
+<?php
+{
+ $servername = "localhost";
+ $username = "root";
+ $password = "";
+ $dbname = "clg";
+ $conn = new mysqli($servername, $username, $password, $dbname);
+ if ($conn->connect_error) {
+ die("Connection failed: " . $conn->connect_error);
+ }
+ $sql = "INSERT INTO staff (firstname, lastname, email)
+VALUES ('Abhi', 'patil', 'abhiDY@gmail.com')";
+if ($conn->query($sql) === TRUE) {
+ echo "New record created successfully";
+} else {
+ echo "Error: " . $sql . "<br>" . $conn->error;
+}
+$conn->close();
+}
+?>
+------------------------------------------------------------------------------------------------
+
+14)Write PHP program based to update data from a table.
+<?php
+{
+ $servername = "localhost";
+ $username = "root";
+ $password = "";
+ $dbname = "clg";
+ $conn = new mysqli($servername, $username, $password, $dbname);
+ if ($conn->connect_error) {
+ die("Connection failed: " . $conn->connect_error);
+ }
+
+ $sql = "UPDATE staff SET lastname='technology' WHERE id=1";
+if ($conn->query($sql) === TRUE) {
+ echo "Record updated successfully";
+} else {
+ echo "Error updating record: " . $conn->error;
+}
+$conn->close();
+}
+?>
+------------------------------------------------------------------------------------------------
+
+15)Write PHP program based to delete data from a table.
+<?php
+{
+ $servername = "localhost";
+ $username = "root";
+ $password = "";
+ $dbname = "clg";
+ $conn = new mysqli($servername, $username, $password, $dbname);
+ if ($conn->connect_error) {
+ die("Connection failed: " . $conn->connect_error);
+ }
+
+$sql = "DELETE FROM staff WHERE id=1";
+if ($conn->query($sql) === TRUE) {
+ echo "Record deleted successfully";
+} else {
+ echo "Error deleting record: " . $conn->error;
+}
+$conn->close();
+}
+?>
+------------------------------------------------------------------------------------------------
+
+16)Write PHP program based on string functions (Any four)
+<?php
+// Define a sample string
+$string = "Hello, World!";
+
+
+$length = strlen($string);
+echo "Length of the string: $length\n";
+
+
+$uppercase = strtoupper($string);
+echo "Uppercase string: $uppercase\n";
+
+
+$trimmedString = trim($string);
+echo "Trimmed string: $trimmedString\n";
+
+
+$lowercaseString = strtolower($string);
+echo "Lowercase string: $lowercaseString \n";
+
+
+$replacedString = str_replace("World", "Universe", $string);
+echo "Replaced string: $replacedString \n";
+
+
+$position = strpos($string, "World");
+echo "Position of 'World' in the string: $position\n";
+?>
+------------------------------------------------------------------------------------------------
+
+17)Write PHP program based on maths functions (Any four)
+<?php
+// Define some sample numbers
+$a = 10;
+$b = -5.5;
+$c = 7.8;
+
+// 1. abs(): Get the absolute value of a number
+$absoluteValue = abs($b);
+echo "Absolute value of $b: $absoluteValue\n";
+
+// 2. round(): Round a floating-point number to the nearest integer
+$roundedNumber = round($c);
+echo "Rounded value of $c: $roundedNumber\n";
+
+// 3. pow(): Raise a number to a power
+$powerResult = pow($a, 2); // $a^2
+echo "$a raised to the power of 2: $powerResult\n";
+
+// 4. sqrt(): Get the square root of a number
+$sqrtValue = sqrt($a);
+echo "Square root of $a: $sqrtValue\n";
+?>
+------------------------------------------------------------------------------------------------
+
+18)Write PHP program based on date functions (Any four)
+<?php
+// Set the default timezone
+date_default_timezone_set('UTC');
+
+// Get the current date and time
+$currentDateTime = date('Y-m-d H:i:s');
+echo "Current Date and Time: $currentDateTime<br>";
+
+// Get the current date
+$currentDate = date('Y-m-d');
+echo "Current Date: $currentDate<br>";
+
+// Get the current time
+$currentTime = date('H:i:s');
+echo "Current Time: $currentTime<br>";
+
+// Get the day of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+$dayOfWeek = date('w');
+echo "Day of the Week: $dayOfWeek<br>";
+
+// Get the current year
+$currentYear = date('Y');
+echo "Current Year: $currentYear<br>";
+
+// Get the current month
+$currentMonth = date('F');
+echo "Current Month: $currentMonth<br>";
+
+// Get the number of days in the current month
+$daysInMonth = date('t');
+echo "Number of Days in Current Month: $daysInMonth<br>";
+
+// Get the current week number
+$currentWeek = date('W');
+echo "Current Week Number: $currentWeek<br>";
+?>
+
